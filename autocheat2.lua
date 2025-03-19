@@ -1,20 +1,4 @@
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("Frame")
-local ToggleButton = Instance.new("TextButton")
-local Dragging, DragInput, DragStart, StartPos
-ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-Frame.Parent = ScreenGui
-Frame.Size = UDim2.new(0, 200, 0, 80)
-Frame.Position = UDim2.new(0, 50, 0, 50)
-Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-Frame.Active = true -- Cho phép kéo
-Frame.Draggable = true
-ToggleButton.Parent = Frame
-ToggleButton.Size = UDim2.new(0, 180, 0, 50)
-ToggleButton.Position = UDim2.new(0, 10, 0, 15)
-ToggleButton.Text = "AUTO: OFF"
-ToggleButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0) -- Mặc định tắt (Đỏ)
-ToggleButton.TextScaled = true
+wait(5)
 local args = {
     [1] = "SetTeam",
     [2] = "Pirates"
