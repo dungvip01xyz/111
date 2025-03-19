@@ -15,7 +15,7 @@ function TweenTo(targetPosition)
     
     if humanoidRootPart then
         local distance = (targetPosition - humanoidRootPart.Position).Magnitude
-        local speed = 350
+        local speed = 200
         local time = distance / speed
         
         local tweenInfo = TweenInfo.new(time, Enum.EasingStyle.Linear)
@@ -54,15 +54,5 @@ spawn(function()
                 TweenTo(closestChest:GetPivot().Position)
             end
         end
-    end
-end)
-ToggleButton.MouseButton1Click:Connect(function()
-    _G.AutoCollectChest = not _G.AutoCollectChest
-    if _G.AutoCollectChest then
-        ToggleButton.Text = "Tắt Auto Nhặt Rương"
-        ToggleButton.BackgroundColor3 = Color3.fromRGB(255, 0, 0) -- Màu đỏ khi bật
-    else
-        ToggleButton.Text = "Bật Auto Nhặt Rương"
-        ToggleButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0) -- Màu xanh khi tắt
     end
 end)
