@@ -39,47 +39,32 @@ function Tween2(v204)
     _G.Clip2 = false
 end
 local function checkMissingFruits(fruitList)
-    -- Kiểm tra sự tồn tại của tradeContainer
-    local tradeContainer = LocalPlayer:FindFirstChild("PlayerGui") 
-        and LocalPlayer.PlayerGui:FindFirstChild("Main") 
-        and LocalPlayer.PlayerGui.Main:FindFirstChild("Trade") 
-        and LocalPlayer.PlayerGui.Main.Trade.Container:FindFirstChild("1") 
-        and LocalPlayer.PlayerGui.Main.Trade.Container["1"]:FindFirstChild("Frame")
-
-    if not tradeContainer then
-        warn("Không tìm thấy giao diện giao dịch!")
-        return false, fruitList  -- Trả về toàn bộ danh sách vì không kiểm tra được
-    end
-
+    local tradeContainer = LocalPlayer.PlayerGui.Main.Trade.Container["1"].Frame
     local requiredFruits, actualFruits, missingFruits = {}, {}, {}
 
-    -- Đếm số lượng trái cây cần có
     for _, fruit in ipairs(fruitList) do
         requiredFruits[fruit] = (requiredFruits[fruit] or 0) + 1
     end
 
-    -- Đếm số lượng trái cây hiện có trong khung giao dịch
     for _, item in pairs(tradeContainer:GetChildren()) do
         actualFruits[item.Name] = (actualFruits[item.Name] or 0) + 1
     end
 
-    -- Kiểm tra những trái còn thiếu
     for fruit, count in pairs(requiredFruits) do
         if (actualFruits[fruit] or 0) < count then
             table.insert(missingFruits, fruit)
         end
     end
-
-    -- Trả kết quả
     if #missingFruits > 0 then
         print("Thiếu các trái sau:")
         for _, fruit in ipairs(missingFruits) do print(fruit) end
-        return false, missingFruits
-    else
-        print("Đủ tất cả các trái trong danh sách!")
-        return true, {}
+        return false
     end
+    print("Đủ tất cả các trái trong danh sách!")
+    return true, {}
 end
+
+
 local function FruitAdd(fruitName)
     ReplicatedStorage.Remotes.TradeFunction:InvokeServer("addItem", fruitName)
 end
@@ -176,7 +161,7 @@ local function Main()
         print("📦 Thêm trái:", fruit)
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
-    local check, missingFruits = checkMissingFruits(checkFruitList)
+    local check = checkMissingFruits(checkFruitList)
     local function getShortFruitList(fruitList)
         local shortList = {}
         for _, fruit in ipairs(fruitList) do
