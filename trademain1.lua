@@ -187,7 +187,7 @@ local function Main()
     local fruitString = getShortFruitList(fruitList)
     local checkString = getShortFruitList(checkFruitList)
     if check then
-        local message = fruitString .. " trade " .. checkString .. "  No trade jump" .. player2Label.Text
+        local message = fruitString .. " trade " .. checkString .. "  No trade jump " .. player2Label.Text
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
         local foundPlayer = GetPlayerByName(player2Label.Text)
         if foundPlayer then
