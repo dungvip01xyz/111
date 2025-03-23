@@ -41,28 +41,34 @@ end
 local function checkMissingFruits(fruitList)
     local tradeContainer = LocalPlayer.PlayerGui.Main.Trade.Container["1"].Frame
     local requiredFruits, actualFruits, missingFruits = {}, {}, {}
+
     for _, fruit in ipairs(fruitList) do
         requiredFruits[fruit] = (requiredFruits[fruit] or 0) + 1
     end
+
     for _, item in pairs(tradeContainer:GetChildren()) do
         actualFruits[item.Name] = (actualFruits[item.Name] or 0) + 1
     end
+
     for fruit, count in pairs(requiredFruits) do
         if (actualFruits[fruit] or 0) < count then
             table.insert(missingFruits, fruit)
         end
     end
+
     if #missingFruits > 0 then
         print("Thiếu các trái sau:")
         for _, fruit in ipairs(missingFruits) do print(fruit) end
+
         local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if human then
             human:ChangeState(Enum.HumanoidStateType.Jumping)
         end
-        break
-    else
-        print("Đủ tất cả các trái trong danh sách!")
+
+        return -- Dừng hàm ngay khi phát hiện thiếu trái
     end
+
+    print("Đủ tất cả các trái trong danh sách!")
 end
 local function FruitAdd(fruitName)
     ReplicatedStorage.Remotes.TradeFunction:InvokeServer("addItem", fruitName)
