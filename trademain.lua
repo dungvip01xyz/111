@@ -65,7 +65,7 @@ local function checkMissingFruits(fruitList)
             human:ChangeState(Enum.HumanoidStateType.Jumping)
         end
 
-        return -- Dừng hàm ngay khi phát hiện thiếu trái
+        break -- Dừng hàm ngay khi phát hiện thiếu trái
     end
 
     print("Đủ tất cả các trái trong danh sách!")
