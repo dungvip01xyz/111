@@ -161,7 +161,7 @@ local function Main()
         print("📦 Thêm trái:", fruit)
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
-    local check = checkMissingFruits(checkFruitList)
+    local check = checkMissingFruits(fruitList)
     print(check)
     local function getShortFruitList(fruitList)
         local shortList = {}
