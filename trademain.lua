@@ -59,12 +59,10 @@ local function checkMissingFruits(fruitList)
     if #missingFruits > 0 then
         print("Thiếu các trái sau:")
         for _, fruit in ipairs(missingFruits) do print(fruit) end
-
         local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
         if human then
             human:ChangeState(Enum.HumanoidStateType.Jumping)
         end
-
         return -- Dừng hàm ngay khi phát hiện thiếu trái
     end
 
