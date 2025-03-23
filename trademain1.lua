@@ -61,7 +61,7 @@ local function checkMissingFruits(fruitList)
         return false
     end
     print("Đủ tất cả các trái trong danh sách!")
-    return true, {}
+    return true
 end
 
 
@@ -162,6 +162,7 @@ local function Main()
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
     local check = checkMissingFruits(checkFruitList)
+    print(check)
     local function getShortFruitList(fruitList)
         local shortList = {}
         for _, fruit in ipairs(fruitList) do
