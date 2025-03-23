@@ -200,7 +200,7 @@ local function Main()
             print("🔍 Kiểm tra trái:", fruit)
         end
     else
-        local message = "I can't add " .. fruitString .. "I have" .. checkString .. "F" .. player2Label.Text
+        local message = "I can't add " .. fruitString .. "I have  " .. checkString .. "F  " .. player2Label.Text
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
         wait(5)
         local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
