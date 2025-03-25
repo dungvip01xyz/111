@@ -169,7 +169,7 @@ local function Main()
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
     local check = checkMissingFruits(fruitList)
-    local FruitCheck = FruitCheck(checkFruitList)
+    local fruitCheckResult = FruitCheck(fruitList)
     print(check)
     local function getShortFruitList(fruitList)
         local shortList = {}
@@ -188,23 +188,21 @@ local function Main()
             CheckReady(foundPlayer.Name)
         else
             print("❌ Không tìm thấy người chơi, không thể kiểm tra trạng thái Ready.")
-        end   
-        for _, fruit in ipairs(checkFruitList) do
-            if FruitCheck then
-                ReplicatedStorage.Remotes.TradeFunction:InvokeServer("accept")
-                wait(15)
-                local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-                if human then
-                    human:ChangeState(Enum.HumanoidStateType.Jumping)
-                end
-                else
-                    local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-                    if human then
-                        human:ChangeState(Enum.HumanoidStateType.Jumping)
-                    end
-                end            
-            print("🔍 Kiểm tra trái:", fruit)
-        end
+        end 
+        if fruitCheckResult then
+            ReplicatedStorage.Remotes.TradeFunction:InvokeServer("accept")
+            wait(15)
+            local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if human then
+                human:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
+        else
+            local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+            if human then
+                human:ChangeState(Enum.HumanoidStateType.Jumping)
+            end
+        end 
+
     else
         local message = "I can't add " .. fruitString .. " I have " .. checkString .. " F " .. player2Label.Text
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
