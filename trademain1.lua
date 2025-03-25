@@ -68,46 +68,32 @@ end
 local function FruitAdd(fruitName)
     ReplicatedStorage.Remotes.TradeFunction:InvokeServer("addItem", fruitName)
 end
-function FruitCheck(fruitList)
-    local tradeSlot = Trade:FindFirstChild("Container") and Trade.Container["2"]
-    local frame = tradeSlot and tradeSlot.Frame
-    if not frame then
-        warn("❌ Không tìm thấy khung giao dịch!")
-        return
-    end
-    local requiredFruits = {}
+local function FruitCheck(fruitList)
+    local tradeContainer = LocalPlayer.PlayerGui.Main.Trade.Container["2"].Frame
+    local requiredFruits, actualFruits, missingFruits = {}, {}, {}
+
     for _, fruit in ipairs(fruitList) do
         requiredFruits[fruit] = (requiredFruits[fruit] or 0) + 1
     end
-    local actualFruits = {}
-    for _, item in pairs(frame:GetChildren()) do
+
+    for _, item in pairs(tradeContainer:GetChildren()) do
         actualFruits[item.Name] = (actualFruits[item.Name] or 0) + 1
     end
-    local missingFruits = {}
+
     for fruit, count in pairs(requiredFruits) do
         if (actualFruits[fruit] or 0) < count then
-            table.insert(missingFruits, fruit .. " (" .. count .. " cần, " .. (actualFruits[fruit] or 0) .. " có)")
+            table.insert(missingFruits, fruit)
         end
     end
     if #missingFruits > 0 then
-        warn("❌ Thiếu các trái sau: " .. table.concat(missingFruits, ", "))
-        local human = LocalPlayer and LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-        if human then
-            human:ChangeState(Enum.HumanoidStateType.Jumping)
-        end
-        return
+        print("Thiếu các trái sau:")
+        for _, fruit in ipairs(missingFruits) do print(fruit) end
+        return false
     end
-    print("✅ Đủ tất cả các trái cây! Chấp nhận giao dịch...")
-    ReplicatedStorage.Remotes.TradeFunction:InvokeServer("accept")
-    wait(15)
-    local human = LocalPlayer and LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-    if human then
-        human:ChangeState(Enum.HumanoidStateType.Jumping)
-    end
+    print("Đủ tất cả các trái trong danh sách!")
+    return true
 end
-
-
-
+ 
 local function GetPlayerByName(targetName)
     for _, player in pairs(Players:GetPlayers()) do
         if player.DisplayName == targetName then
@@ -183,6 +169,7 @@ local function Main()
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
     local check = checkMissingFruits(fruitList)
+    local FruitCheck = FruitCheck(checkFruitList)
     print(check)
     local function getShortFruitList(fruitList)
         local shortList = {}
@@ -203,7 +190,19 @@ local function Main()
             print("❌ Không tìm thấy người chơi, không thể kiểm tra trạng thái Ready.")
         end   
         for _, fruit in ipairs(checkFruitList) do
-            FruitCheck(fruit)
+            if FruitCheck then
+                ReplicatedStorage.Remotes.TradeFunction:InvokeServer("accept")
+                wait(15)
+                local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                if human then
+                    human:ChangeState(Enum.HumanoidStateType.Jumping)
+                end
+                else
+                    local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+                    if human then
+                        human:ChangeState(Enum.HumanoidStateType.Jumping)
+                    end
+                end            
             print("🔍 Kiểm tra trái:", fruit)
         end
     else
