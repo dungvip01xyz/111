@@ -169,7 +169,7 @@ local function Main()
     end
     print("🎯 Đối tác giao dịch:", player2Label.Text)
     local check = checkMissingFruits(fruitList)
-    local fruitCheckResult = FruitCheck(fruitList)
+    local fruitCheckResult = FruitCheck(checkFruitList)
     print(check)
     local function getShortFruitList(fruitList)
         local shortList = {}
