@@ -36,7 +36,7 @@ function Tween2(v204)
     _G.Clip2 = true;
     wait(v205 / v206);
     _G.Clip2 = false;
-    wait(0.2)
+    wait(1)
     local human = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
     if human then
         human:ChangeState(Enum.HumanoidStateType.Jumping)
