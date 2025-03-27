@@ -1,0 +1,2 @@
+getgenv().CheckpPlayer = {"dungvipabc12", "dungvipabc54", "dungvipabc56", "dungvipabc26", "dungvipabc50", "dungvipabc57", "dungvipabc59", "dungvipabc64", "dungvipabc34", "dungvipabc36"}
+loadstring(game:HttpGet("https://raw.githubusercontent.com/dungvip01xyz/111/refs/heads/main/hopserver.lua"))()
