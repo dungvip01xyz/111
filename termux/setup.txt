@@ -1,4 +1,4 @@
 pkg update && pkg upgrade -y
 pkg install android-tools -y
 termux-setup-storage
-pip install request
+pip install requests
