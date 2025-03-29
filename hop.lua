@@ -118,7 +118,7 @@ for _, playerName in ipairs(playerNames) do
             break -- Dừng vòng lặp ngay khi tìm thấy người cần tránh
         else
             print(playerName .. " không có trong server, tôi ở lại.")
-            fixlag()
         end
     end
 end
+fixlag()
