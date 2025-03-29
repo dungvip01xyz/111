@@ -106,7 +106,6 @@ end
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer -- Lấy người chơi đang chạy script
 local playerNames = getgenv().CheckpPlayer
-getgenv().CheckpPlayers
 for _, playerName in ipairs(playerNames) do 
     if playerName == localPlayer.Name then
         print("Tên tôi có trong danh sách, bỏ qua kiểm tra.") 
@@ -118,7 +117,7 @@ for _, playerName in ipairs(playerNames) do
             break -- Dừng vòng lặp ngay khi tìm thấy người cần tránh
         else
             print(playerName .. " không có trong server, tôi ở lại.")
+            fixlag()
         end
     end
 end
-fixlag()
