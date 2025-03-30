@@ -103,7 +103,7 @@ function fixlag()
         end
     end
 end
-wait(10)
+wait(30)
 local Players = game:GetService("Players")
 local localPlayer = Players.LocalPlayer -- Lấy người chơi đang chạy script
 local playerNames = getgenv().CheckpPlayer
