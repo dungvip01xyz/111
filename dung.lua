@@ -122,6 +122,7 @@ for _, playerName in ipairs(playerNames) do
         else
             print(playerName .. " không có trong server, tôi ở lại.")
 			fixlag()
+			loadstring(game:HttpGet("https://raw.githubusercontent.com/ShimeKano/redz/refs/heads/main/Source.luau"))()
         end
     end
 end
