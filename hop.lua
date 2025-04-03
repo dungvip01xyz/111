@@ -166,8 +166,8 @@ for _, playerName in ipairs(playerNames) do
             break 
         else
             print(playerName .. " không có trong server, tôi ở lại.")
-			task.spawn(SuperFixLagMAX)
-            task.spawn(checkBeli, 120)
         end
     end
 end
+task.spawn(SuperFixLagMAX)
+task.spawn(checkBeli, 120)
