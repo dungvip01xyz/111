@@ -21,7 +21,7 @@ end
 
 function Tween2(v204)
     local v205 = (v204.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude;
-    local v206 = 250;
+    local v206 = 200;
     if (v205 >= 350) then
         v206 = 350;
     end
